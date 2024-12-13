@@ -9,6 +9,7 @@ com\mycompany\myapp\dao\TempBookingsDAO.class
 com\mycompany\myapp\dao\CoursesDAO.class
 com\mycompany\myapp\Register$1.class
 com\mycompany\myapp\DatabaseConnection.class
+com\mycompany\myapp\methods\MainMethods.class
 com\mycompany\myapp\model\Departments.class
 com\mycompany\myapp\Register$6.class
 com\mycompany\myapp\dao\FacultiesDAO.class

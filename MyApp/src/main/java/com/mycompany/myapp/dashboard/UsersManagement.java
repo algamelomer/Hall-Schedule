@@ -10,22 +10,18 @@ import com.mycompany.myapp.TableData;
 
 import com.mycompany.myapp.model.Users;
 
+import com.mycompany.myapp.methods.MainMethods;
+
+import com.mycompany.myapp.dao.UsersDAO;
+import java.util.List;
+
 /**
  *
  * @author omar
  */
 public class UsersManagement extends javax.swing.JFrame {
 
-    String[] headers = {"Student Name", "Status", "Start Time", "End Time", "Room"};
-
-    Object[][] rowData = {
-        {"John Doe", "Present", "9:00 AM", "10:00 AM", "Room 101"},
-        {"Jane Smith", "Absent", "10:30 AM", "11:30 AM", "Room 102"},
-        {"Mark Johnson", "Present", "1:00 PM", "2:00 PM", "Room 101"}
-    };
-    TableData table = new TableData(headers, rowData);
     //        TableData table = new TableData();
-
     private String role;
 
     /**
@@ -41,6 +37,13 @@ public class UsersManagement extends javax.swing.JFrame {
         if (this.role.equals("SuperAdmin") || this.role.equals("Admin")) {
             initComponents();
 
+            String[] headers = {"id", "name", "email", "role", "password", "phone", "departments_departments_id"};
+            UsersDAO usersDAO = new UsersDAO();
+            MainMethods methods = new MainMethods();
+
+            List<Users> userTableData = usersDAO.getAllUsers();
+            Object[][] rowData = methods.convertListToObjectArray(userTableData);
+            TableData table = new TableData(headers, rowData);
             // Set layout manager for tablepanel (if not already set)
             tablepanel.setLayout(new java.awt.BorderLayout());
 
