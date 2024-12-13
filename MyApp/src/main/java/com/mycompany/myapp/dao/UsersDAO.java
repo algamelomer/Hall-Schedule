@@ -13,8 +13,28 @@ import java.security.NoSuchAlgorithmException;
 public class UsersDAO {
 
     public List<Users> getAllUsers() {
-        // Logic for fetching all users from the 'users' table
-        return null;
+        List<Users> usersList = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        try (Connection conn = DatabaseConnection.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Users user = new Users(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getInt("departments_departments_id")
+                );
+                usersList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usersList;
     }
 
     public Users login(String email, String password) {

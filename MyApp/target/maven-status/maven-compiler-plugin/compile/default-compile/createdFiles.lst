@@ -3,6 +3,7 @@ com\mycompany\myapp\Register$4.class
 com\mycompany\myapp\Login$1.class
 com\mycompany\myapp\Login.class
 com\mycompany\myapp\TableData$1.class
+com\mycompany\myapp\dashboard\UsersManagement$1.class
 com\mycompany\myapp\model\Users.class
 com\mycompany\myapp\dao\TempBookingsDAO.class
 com\mycompany\myapp\dao\CoursesDAO.class
@@ -14,6 +15,7 @@ com\mycompany\myapp\dao\FacultiesDAO.class
 com\mycompany\myapp\dao\UsersDAO.class
 com\mycompany\myapp\Login$4.class
 com\mycompany\myapp\Test.class
+com\mycompany\myapp\dashboard\UsersManagement.class
 com\mycompany\myapp\Main.class
 com\mycompany\myapp\dao\DepartmentsDAO.class
 com\mycompany\myapp\MyApp.class
@@ -21,7 +23,6 @@ com\mycompany\myapp\Register$5.class
 com\mycompany\myapp\TableData.class
 com\mycompany\myapp\model\TempBookings.class
 com\mycompany\myapp\model\Faculties.class
-com\mycompany\myapp\TableData$2.class
 com\mycompany\myapp\Login$2.class
 com\mycompany\myapp\model\Courses.class
 com\mycompany\myapp\Register$3.class
