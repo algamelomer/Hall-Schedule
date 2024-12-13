@@ -26,7 +26,7 @@ public class Main extends javax.swing.JFrame {
         this.user = user;
         initComponents();
         if (user != null) {
-            jLabel1.setText(String.valueOf(user.getId())); // Assuming getName() is a method in the Users class
+            jLabel1.setText(String.valueOf(user.getId()));
         }
     }
 

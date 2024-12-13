@@ -55,7 +55,7 @@ public class FacultiesDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // Return null if department is not found
+        return null; 
     }
     
 }
