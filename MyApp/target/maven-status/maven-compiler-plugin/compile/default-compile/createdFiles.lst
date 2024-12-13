@@ -30,6 +30,7 @@ com\mycompany\myapp\model\ClassRooms.class
 com\mycompany\myapp\Login$3.class
 com\mycompany\myapp\Register$2.class
 com\mycompany\myapp\Register$7.class
+com\mycompany\myapp\methods\HashPassword.class
 com\mycompany\myapp\model\Schedules.class
 com\mycompany\myapp\dao\ClassRoomsDAO.class
 com\mycompany\myapp\Register.class

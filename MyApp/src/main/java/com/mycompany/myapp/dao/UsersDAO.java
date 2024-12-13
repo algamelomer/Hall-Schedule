@@ -2,6 +2,7 @@ package com.mycompany.myapp.dao;
 
 import com.mycompany.myapp.model.Users;
 import com.mycompany.myapp.DatabaseConnection;
+import com.mycompany.myapp.methods.HashPassword;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,20 +11,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class UsersDAO {
-
-    private String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error hashing password", e);
-        }
-    }
 
     public List<Users> getAllUsers() {
         // Logic for fetching all users from the 'users' table
@@ -35,7 +22,7 @@ public class UsersDAO {
         try (Connection conn = DatabaseConnection.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, email);
-            pstmt.setString(2, hashPassword(password));
+            pstmt.setString(2, HashPassword.hashPassword(password));
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -63,7 +50,7 @@ public class UsersDAO {
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getRole());
-            pstmt.setString(4, hashPassword(user.getPassword()));
+            pstmt.setString(4, HashPassword.hashPassword(user.getPassword()));
             pstmt.setString(5, user.getPhone());
             pstmt.setInt(6, user.getDepartmentId());
 
@@ -81,7 +68,7 @@ public class UsersDAO {
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getRole());
-            pstmt.setString(4, hashPassword(user.getPassword()));
+            pstmt.setString(4, HashPassword.hashPassword(user.getPassword()));
             pstmt.setString(5, user.getPhone());
             pstmt.setInt(6, user.getDepartmentId());
             pstmt.setInt(7, user.getId());
