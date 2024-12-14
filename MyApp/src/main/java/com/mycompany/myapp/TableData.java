@@ -8,12 +8,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author omar
  */
 public class TableData extends javax.swing.JPanel {
+
+    private Map<Integer, Integer> idMap = new HashMap<>();
 
     /**
      * Creates new form TableData
@@ -23,24 +27,24 @@ public class TableData extends javax.swing.JPanel {
     }
 
     public TableData(String[] headers, Object[][] rowData) {
+        int DataId;
         initComponents();
         loadData(headers, rowData);
         detailedCellInfo();
     }
 
     private void loadData(String[] headers, Object[][] rowData) {
-        // Get the current table model
+        String[] adjustedHeaders = new String[headers.length - 1];
+        System.arraycopy(headers, 1, adjustedHeaders, 0, adjustedHeaders.length);
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
-        // Clear any existing rows in the table
         model.setRowCount(0);
+        setTableHeaders(adjustedHeaders);
 
-        // Set column headers dynamically based on the input
-        setTableHeaders(headers);
-
-        // Add row data dynamically based on the input
-        for (Object[] row : rowData) {
-            model.addRow(row);
+        for (int i = 0; i < rowData.length; i++) {
+            idMap.put(i, (Integer) rowData[i][0]);
+            Object[] rowWithoutId = new Object[rowData[i].length - 1];
+            System.arraycopy(rowData[i], 1, rowWithoutId, 0, rowWithoutId.length);
+            model.addRow(rowWithoutId);
         }
     }
 
@@ -51,15 +55,16 @@ public class TableData extends javax.swing.JPanel {
                 int row = jTable1.rowAtPoint(e.getPoint());
                 int column = jTable1.columnAtPoint(e.getPoint());
 
-                // Make sure the clicked cell is valid
                 if (row >= 0 && column >= 0) {
                     Object cellValue = jTable1.getValueAt(row, column);
+                    int idValue = idMap.get(row);
+
                     String message = "Cell Details:\n"
+                            + "ID: " + idValue + "\n"
                             + "Row: " + (row + 1) + "\n"
                             + "Column: " + jTable1.getColumnName(column) + "\n"
                             + "Value: " + cellValue;
 
-                    // Displaying the details in a dialog box
                     JOptionPane.showMessageDialog(null, message, "Cell Details", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -67,10 +72,7 @@ public class TableData extends javax.swing.JPanel {
     }
 
     private void setTableHeaders(String... headers) {
-        // Get the current table model
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
-        // Set the column names dynamically based on the input
         model.setColumnIdentifiers(headers);
     }
 
